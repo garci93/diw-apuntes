@@ -1,0 +1,23 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<form>
+			<input type="text"/>
+			<input type="text"/>
+			<button type="submit"/>
+		</form>
+		<table>
+			<th>
+				<tr>
+				</tr>
+			</th>
+			<td>
+				<tr>
+					<img src=www.exampleurl.com/exampleimage.jpg></img>
+				</tr>
+			</td>
+		</table>
+		<h3></h3>
+	</body>
+</html>

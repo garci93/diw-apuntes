@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	</head>
+	<body>
+		<form>
+			<label for="i1"></label>
+			<input type="text" id=i1"/>
+			<label for="i1"></label>
+			<input type="text" id="i2"/>
+			<button type="submit"/>
+		</form>
+		<table>
+			<th>
+				<tr>
+				</tr>
+			</th>
+			<td>
+				<tr>
+					<img src=www.exampleurl.com/exampleimage.jpg></img>
+				</tr>
+			</td>
+		</table>
+		<h3></h3>
+		<div style="background-color:lightblue">
+			<p>Este texto tendrá un fondo azul claro</p>
+			<a href="www.example.com">Hipervínculo de ejemplo</a>
+		</div>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<ol>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ol>
+		<p><del>Este texto debe ser borrado. </del><ins>Esto texto debe ser insertado.</p>
+		<!-- Esto es un comentario y no aparecerá en la página. -->
+		<abbr title="Diseño de Interfaces Web">DIW</a>
+		<address>P. Sherman<br>
+		Calle Wallaby 42<br>
+		Sydney</address>
+		<footer>
+			<em>Este texto irá al final del cuerpo</em>
+		</footer>
+	</body>
+</html>

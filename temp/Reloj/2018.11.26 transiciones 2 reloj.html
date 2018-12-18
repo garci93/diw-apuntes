@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title></title>
+        <style media="screen">
+            .reloj{
+                height:60%;
+            }
+            #esfera,#milisegundero,#segundero,#minutero,#horario {
+                height: 60%;
+                width: (16*60/9)%;
+                position: absolute;
+            }
+            #esfera {
+                i-index: 1
+            }
+            #milisegundero {
+                i-index: 2
+            }
+            #segundero {
+                i-index: 3
+            }
+            #minutero {
+                i-index: 4
+            }
+            #horario {
+                i-index: 5
+            }
+        </style>
+        <script type="text/javascript">
+            window.onload = function(){
+                reloj.addEventListener("mouseover",aumentar);
+                reloj.addEventListener("mouseout",reducir);
+            }
+            var reducido = false;
+            var d=new Date();
+            var milisegundos = d.getMilliseconds();
+            var segundos = d.getSeconds();
+            var minutos= d.getMinutes();
+            var horas = (d.getHours()*60+d.getMinutes())/60;
+            var degms=3.6*milisegundos;
+            var degs=6*segundos;
+            var degm=6*minutos+degs*1/60;
+            var degh=(360/12)*horas;
+            setInterval(function(){
+                degms+=3.6;
+                milisegundero.style.transform=`rotate(${degms}deg)`;
+                degs+=0.06;
+                segundero.style.transform=`rotate(${degs}deg)`;
+                degm+=0.06/60;
+                minutero.style.transform=`rotate(${degm}deg)`;
+                degh+=(0.001/12);
+                horario.style.transform=`rotate(${degh}deg)`;
+            }, 10);
+            if(!reducido) {
+                reducir();
+            }
+
+            function reducir() {
+                setTimeout(function(){
+                    if(!reducido){
+                        var ancho = (100-(9*10/16));
+                        reloj.style = "height : 10%";
+                        esfera.style = `height : 10%; left : ${ancho}%; top : 90%;`;
+                        milisegundero.style = `height : 10%; left : ${ancho}%; top : 90%;`;
+                        segundero.style = `height : 10%; left : ${ancho}%; top : 90%;`;
+                        minutero.style = `height : 10%; left : ${ancho}%; top : 90%;`;
+                        horario.style = `height : 10%; left : ${ancho}%; top : 90%;`;
+                        reducido = true;
+                    }
+                }, 5000);
+            }
+
+            function aumentar() {
+                reloj.style = "height : 60%";
+                esfera.style = "height : 60%; left: 0px; top : 0px;";
+                milisegundero.style = "height : 60%; left: 0px; top : 0px;";
+                segundero.style = "height : 60%; left: 0px; top : 0px;";
+                minutero.style = "height : 60%; left: 0px; top : 0px;";
+                horario.style = "height : 60%; left: 0px; top : 0px;";
+                reducido = false;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="reloj" class="reloj">
+            <img id="esfera" src="reloj.jpg">
+            <img id="milisegundero" src="milisegundero.png">
+            <img id="segundero" src="segundero.png">
+            <img id="minutero" src="minutero.png">
+            <img id="horario" src="horario.png">
+        </div>
+    </body>
+</html>

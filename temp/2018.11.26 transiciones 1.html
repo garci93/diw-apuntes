@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title></title>
+        <style media="screen">
+            .caja:active {-moz-transition: -moz-transform 2s ease-in-out 0.5s;
+                        -webkit-transition: -webkit-transform 2s ease-in-out 0.5s;
+            }
+
+            #caja1:active {
+                -moz-transform: translate(50px, 50px);
+                -webkit-transform: translate(50px, 50px);
+            }
+            #caja2:active {
+                -moz-transform: rotate(20deg);
+                -webkit-transform: rotate(20deg);
+            }
+            #caja3:active {
+                -moz-transform: rotate(-20deg);
+                -webkit-transform: rotate(-20deg);
+            }
+            #caja4:active {
+                -ms-transform: scale(3, 2);
+                -webkit-transform: scale(3, 2);
+            }
+            #caja5:active {
+                -moz-transform: skewX(20deg);
+                -webkit-transform: skewX(20deg);
+            }
+            #caja6:active {
+                -ms-transform: skewY(20deg);
+                -webkit-transform: skewY(20deg);
+            }
+            #caja7:active {
+                -ms-transform: skew(20deg, 10deg);
+                -webkit-transform: skew(20deg, 10deg);
+            }
+            #caja8:active {
+                -ms-transform: matrix(1, -0.4, 0.2, -1, 20, -10);
+                -webkit-transform: matrix(1, -0.4, 0.2, -1, 20, -10);
+            }
+            .caja {background: #ff4040;
+                height: 50px;
+                width: 200px
+                    }
+        </style>
+    </head>
+    <body>
+        <div id="caja1" class="caja">
+            <p>Desplazar</p>
+        </div>
+        <br>
+        <div id="caja2" class="caja">
+            <p>Rotar derecha</p>
+        </div>
+        <br>
+        <div id="caja3" class="caja">
+            <p>Rotar izquierda</p>
+        </div>
+        <br>
+        <div id="caja4" class="caja">
+            <p>Cambiar tamaño</p>
+        </div>
+        <br>
+        <div id="caja5" class="caja">
+            <p>Sesgar en horizontal</p>
+        </div>
+        <br>
+        <div id="caja6" class="caja">
+            <p>Sesgar en vertical</p>
+        </div>
+        <br>
+        <div id="caja7" class="caja">
+            <p>Sesgar ambos</p>
+        </div>
+        <br>
+        <div id="caja8" class="caja">
+            <p>Transformar en matriz</p>
+        </div>
+        <br>
+    </body>
+</html>

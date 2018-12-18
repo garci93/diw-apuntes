@@ -1,0 +1,25 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<form>
+			<label for="i1"></label>
+			<input type="text" id=i1"/>
+			<label for="i1"></label>
+			<input type="text" id="i2"/>
+			<button type="submit"/>
+		</form>
+		<table>
+			<th>
+				<tr>
+				</tr>
+			</th>
+			<td>
+				<tr>
+					<img src=www.exampleurl.com/exampleimage.jpg></img>
+				</tr>
+			</td>
+		</table>
+		<h3></h3>
+	</body>
+</html>

@@ -1,0 +1,17 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<form>
+			<input type="text"/>
+			<input type="text"/>
+			<button type="submit"/>
+		</form>
+		<table>
+			<th>
+			</th>
+			<td>
+			</td>
+		</table>
+	</body>
+</html>

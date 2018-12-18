@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<form>
+			<input type="button" onclick="andar()" value="andar"/>
+			<textarea rows="10" cols="50" id="area"></textarea>
+		</form>
+		<script type="text/javascript">
+			function andar() {
+				var d = new Date();
+				var h = d.getHours();
+				area.innerHTML = "Estoy andando ${h}";
+				comprobar(document.getElementById("area"));
+			}
+
+			function comprobar(area) {
+				var texto = area.value;
+				for (var i = 0; i < texto.length; i++) {
+					if(typeof(texto[i] == "number") {
+						alert(texto[i]);
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

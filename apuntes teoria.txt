@@ -1,0 +1,63 @@
+Tres formas de dar formato CSS: en línea, mediante atributo, y por archivo externo
+
+<style>
+  p: {
+    bla-blaa: blaa;  -->esto sólo se
+    ble: bleble;
+  }
+</style>
+
+<style>
+  p em: {
+    bla-blaa: blaa;  --> esto sólo se aplicará a los em que estén en un p
+    ble: bleble;
+  }
+</style>
+
+Declaración de una clase en CSS
+
+.nombreClase {
+  a: 1;
+  b: 2;
+}
+
+Llamada a una clase en CSS
+
+<tag class="nombreClase">...
+
+Una etiqueta puede pertenecer a varias clases, simplemente ponemos sus nombres separados por un espacio: "nombreClase1 nombreClase2"
+
+También, si quieres aplicar una clase a instancias individuales:
+
+#nombreClaseI {
+  eeeeee
+}
+
+<tag id="nombreClaseI">...
+
+  p > h1: {
+    ...  --> sólo aplica si h1 es un hijo directo de p
+  }
+
+  p + h1: {
+    ...  --> sólo aplica si ambos están al mismo nivel de herencia y juntos
+  }
+
+  image[border=5]: {
+    ...  --> aplica a las imágenes cuyo border sea 5
+  }
+
+  p.nth.child(2): {
+    ...  --> sólo aplica al segundo hijo
+  }
+
+
+---
+
+
+p[name] -> selecciona todos los p que tengan un atributo name
+p[name] = "tal"] -> selecciona todos los p cuya name sea tal
+p[class ^= ".tal"] -> selecciona todos los p cuya clase empiece por .tal
+p[name $= "tal"] -> selecciona todos los p cuyo name acabe en tal
+p[name *= "tal"] -> selecciona todos los p cuyo nombre contenga tal
+
