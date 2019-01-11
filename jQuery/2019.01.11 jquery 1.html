@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <script type="text/javascript" src="jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#parrafo").click(function(evento){
+                $("#parrafo").fadeOut();
+                $("#parrafo").fadeIn();
+                $("#parrafo").hide(4000,mostrar);
+                $("#parrafo").slideUp(5000);
+            });
+
+            function mostrar () {
+                $("#parrafo").show(6000);
+            }
+        });
+    </script>
+    <body>
+        <p id="parrafo">Esto es un elemento de ejemplo</p>
+    </body>
+</html>
