@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <script type="text/javascript" src="jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#b1,#b2").attr("align","center");
+            $(".capa1,.capa2,.capa3,#b2").attr("hidden","true");
+
+            $("#b1").click(function(){
+                $(".form2").removeAttr("hidden");
+                $(".form2").fadeOut(0,mostrar1A5Seg);
+            });
+
+            function mostrar1A5Seg () {
+                $(".form2").fadeIn((parseInt(Math.random()*5)+1)*1000,cambiarBoton1A2);
+            }
+
+            function cambiarBoton1A2 () {
+                $("#b2").removeAttr("hidden");
+                $("#b1").attr("hidden","true");
+            }
+
+            $("#b2").click(function(){
+                $(".capa1,.capa3").removeAttr("hidden");
+                $(".capa1,.capa3").fadeOut(0,mostrar3A10Seg);
+            });
+
+            function mostrar3A10Seg () {
+                var tiempo = (parseInt(Math.random()*10)+3)*1000;
+                $(".capa1,.capa3").fadeIn(tiempo,cambiarBoton2A1);
+                $(".capa2").fadeOut(tiempo,function(){
+                    $(".capa2").attr("hidden","true");
+                });
+            }
+
+            function cambiarBoton2A1 () {
+                $("#b1").removeAttr("hidden");
+                $("#b2").attr("hidden","true");
+            }
+        });
+
+    </script>
+    <body>
+        <div class="">
+            <input type="text" name="" value="">
+            <button type="button" name="button">Botón #1</button>
+        </div>
+    </body>
+</html>
