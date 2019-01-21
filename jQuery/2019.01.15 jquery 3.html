@@ -2,51 +2,85 @@
 <html lang="es" dir="ltr">
     <head>
         <meta charset="utf-8">
-    </head>
-    <script src="jquery-3.3.1.js"></script>
-    <script type="text/javascript">
+        <title></title>
+        <style media="screen">
+            p{
+                margin: 1px 0 1px 0;
+                font-size: 0.5%;
+            }
+            div{
+                border-style: solid;
+                border-width: 1px;
+                border-color: #aaa;
+                width: 15%;
+                height: 100%;
+                display: inline-block;
+            }
+        </style>
+        <script src="jquery.js" type="text/javascript"></script>
+        <script>
+
+        function intervalo(min,max){
+            return parseInt(Math.random()*(max-min)+min);
+        }
+
+        function insertarParrafo(id,veces){
+            $(`#${id}`,'body').append("<h1>Párrafo de título</h1>");
+            for (var i = 1; i < veces; i++) {
+                $(`#${id}`,'body').append( `<p>Párrafo número ${i}</p>`);
+            }
+        }
+
+        function insertar(numero){
+            $('body').append("<br>");
+            for (var i = 1; i <= numero; i++) {
+                $('body').append(`<div id="d${i}"class="dropdown"></div>`);
+                insertarParrafo(`d${i}`,numero*intervalo(10,20));
+                $("#boton").hide(1);
+            }
+        }
+
+        function pararIntervalo(inter){
+            $('div').off();
+            clearInterval(inter);
+            $('p').fadeIn(1);
+        }
+
+        function fadeInYOut(elementos, pos){
+            $(elementos[pos]).fadeIn(intervalo(1000,3000),function(){
+                $(elementos[pos]).fadeOut(intervalo(1000,3000));
+            });
+        }
         $(document).ready(function(){
-            $("#b1,#b2").attr("align","center");
-            $(".capa1,.capa2,.capa3,#b2").attr("hidden","true");
-
-            $("#b1").click(function(){
-                $(".form2").removeAttr("hidden");
-                $(".form2").fadeOut(0,mostrar1A5Seg);
-            });
-
-            function mostrar1A5Seg () {
-                $(".form2").fadeIn((Math.floor(Math.random()*5)+1)*1000,cambiarBoton1A2);
-            }
-
-            function cambiarBoton1A2 () {
-                $("#b2").removeAttr("hidden");
-                $("#b1").attr("hidden","true");
-            }
-
-            $("#b2").click(function(){
-                $(".capa1,.capa3").removeAttr("hidden");
-                $(".capa1,.capa3").fadeOut(0,mostrar3A10Seg);
-            });
-
-            function mostrar3A10Seg () {
-                var tiempo = (Math.floor(Math.random()*10)+3)*1000;
-                $(".capa1,.capa3").fadeIn(tiempo,cambiarBoton2A1);
-                $(".capa2").fadeOut(tiempo,function(){
-                    $(".capa2").attr("hidden","true");
+            $("#boton").on('click',function(){
+                var numero=$("#veces").prop('value');
+                (numero>2&&numero<7)?insertar(numero):alert("Entre 2 y 7");
+                $('div').on('mouseover',function(){
+                    var parrafos=$('p').toArray();
+                    var longitud=parrafos.length;
+                    var tiempo=100;
+                    var interv=setInterval(function(){
+                        tiempo--;
+                        tiempo==0?pararIntervalo(interv):fadeInYOut(parrafos,intervalo(0,longitud));
+                    }
+                    , 200);
                 });
-            }
-
-            function cambiarBoton2A1 () {
-                $("#b1").removeAttr("hidden");
-                $("#b2").attr("hidden","true");
-            }
+                $('div').on('mouseout',function(){
+                    var parrafos=$('p').toArray();
+                    var longitud=parrafos.length;
+                    var tiempo=100;
+                    var interv=setInterval(function(){
+                        tiempo--;
+                        tiempo==0?pararIntervalo(interv):fadeInYOut(parrafos,intervalo(0,longitud));
+                    }
+                    , 200);
+                });
+            })
         });
-
-    </script>
+        </script>
+    </head>
     <body>
-        <div class="">
-            <input type="text" name="" value="">
-            <button type="button" name="button">Botón #1</button>
-        </div>
+        <input id="veces" type="number" name="" value=""></input>
+        <button id="boton" type="button" name="button">Botón #1</button>
     </body>
 </html>
