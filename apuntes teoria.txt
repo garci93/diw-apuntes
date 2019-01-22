@@ -61,3 +61,8 @@ p[class ^= ".tal"] -> selecciona todos los p cuya clase empiece por .tal
 p[name $= "tal"] -> selecciona todos los p cuyo name acabe en tal
 p[name *= "tal"] -> selecciona todos los p cuyo nombre contenga tal
 
+Es mejor usar:
+
+length() en vez de size()
+prop() en vez de attrib()
+offset() en vez de position()
