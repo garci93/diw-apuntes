@@ -13,18 +13,10 @@
                 height: 100%;
                 background-image: radial-gradient(#20a030,#007040);
             }
-            div.oculto {
-                height: 10%;
-                width: 95%;
-                position: absolute;
-                top: 90%;
-                display: block;
-                border-style: none;
-            }
             img {
                 height: 200px;
                 position: fixed;
-                top: 60%;
+                top: 400px;
             }
             img#barba {
                 left: 20px;
@@ -67,26 +59,30 @@
                 revert: true
         });
             $("img#barba").mouseup(function (e) {
-                if (e.pageX>=400 && e.pageX<=800 && e.pageY<=400) {
+                if ($(this).data("colocada")){
                     $(this).draggable({revert: false});
-                    $(this).css("left","300px");
-                    $(this).css("top","40px");
-                    $(this).data("colocada",true);
+                    $(this).data("colocada",false);
+                    $(this).css("left","20px");
+                    $(this).css("top","400px");
+                }
+                if (e.pageX>=200 && e.pageX<=1000 && e.pageY<=400) {
+                    if (!$("img#arturo").data("colocada")){
+                        $(this).draggable({revert: false});
+                        $(this).css("left","300px");
+                        $(this).css("top","40px");
+                        $(this).data("colocada",true);
+                    }
                 }
             });
             $("img#arturo").mouseup(function (e) {
-                if (e.pageX>=400 && e.pageX<=800 && e.pageY<=400) {
-                    var array = $("img").filter(function() {
-                        return $(this).css("z-index") >= 2;
-                    });
-                    var alguna = false;
-                    array.forEach({
-                        if ($(this).data("colocada",true)) {
-                            alguna=true;
-                            break;
-                        }
-                    });
-                    if (!alguna) {
+                if ($(this).data("colocada")){
+                    $(this).draggable({revert: false});
+                    $(this).data("colocada",false);
+                    $(this).css("left","120px");
+                    $(this).css("top","400px");
+                }
+                if (e.pageX>=200 && e.pageX<=1000 && e.pageY<=400) {
+                    if (!$("img#miguel").data("colocada")){
                         $(this).draggable({revert: false});
                         $(this).css("left","320px");
                         $(this).css("top","60px");
@@ -95,7 +91,13 @@
                 }
             });
             $("img#miguel").mouseup(function (e) {
-                if (e.pageX>=400 && e.pageX<=800 && e.pageY<=400) {
+                if ($(this).data("colocada")){
+                    $(this).draggable({revert: false});
+                    $(this).data("colocada",false);
+                    $(this).css("left","220px");
+                    $(this).css("top","400px");
+                }
+                if (e.pageX>=200 && e.pageX<=1000 && e.pageY<=400) {
                     if (!$("img#castillo").data("colocada")){
                         $(this).draggable({revert: false});
                         $(this).css("left","340px");
@@ -105,7 +107,13 @@
                 }
             });
             $("img#castillo").mouseup(function (e) {
-                if (e.pageX>=400 && e.pageX<=800 && e.pageY<=400) {
+                if ($(this).data("colocada")){
+                    $(this).draggable({revert: false});
+                    $(this).data("colocada",false);
+                    $(this).css("left","320px");
+                    $(this).css("top","400px");
+                }
+                if (e.pageX>=200 && e.pageX<=1000 && e.pageY<=400) {
                     if (!$("img#alejandro").data("colocada")){
                         $(this).draggable({revert: false});
                         $(this).css("left","360px");
@@ -115,7 +123,13 @@
                 }
             });
             $("img#alejandro").mouseup(function (e) {
-                if (e.pageX>=400 && e.pageX<=800 && e.pageY<=400) {
+                if ($(this).data("colocada")){
+                    $(this).draggable({revert: false});
+                    $(this).data("colocada",false);
+                    $(this).css("left","420px");
+                    $(this).css("top","400px");
+                }
+                if (e.pageX>=200 && e.pageX<=1000 && e.pageY<=400) {
                     if (!$("img#gallego").data("colocada")){
                         $(this).draggable({revert: false});
                         $(this).css("left","380px");
@@ -125,7 +139,13 @@
                 }
             });
             $("img#gallego").mouseup(function (e) {
-                if (e.pageX>=400 && e.pageX<=800 && e.pageY<=400) {
+                if ($(this).data("colocada")){
+                    $(this).draggable({revert: false});
+                    $(this).data("colocada",false);
+                    $(this).css("left","520px");
+                    $(this).css("top","400px");
+                }
+                if (e.pageX>=200 && e.pageX<=1000 && e.pageY<=400) {
                     if (!$("img#garci").data("colocada")){
                         $(this).draggable({revert: false});
                         $(this).css("left","400px");
@@ -135,7 +155,13 @@
                 }
             });
             $("img#garci").mouseup(function (e) {
-                if (e.pageX>=400 && e.pageX<=800 && e.pageY<=400) {
+                if ($(this).data("colocada")){
+                    $(this).draggable({revert: false});
+                    $(this).data("colocada",false);
+                    $(this).css("left","620px");
+                    $(this).css("top","400px");
+                }
+                if (e.pageX>=200 && e.pageX<=1000 && e.pageY<=400) {
                     if (!$("img#mariadelmar").data("colocada")){
                         $(this).draggable({revert: false});
                         $(this).css("left","420px");
@@ -145,7 +171,13 @@
                 }
             });
             $("img#mariadelmar").mouseup(function (e) {
-                if (e.pageX>=400 && e.pageX<=800 && e.pageY<=400) {
+                if ($(this).data("colocada")){
+                    $(this).draggable({revert: false});
+                    $(this).data("colocada",false);
+                    $(this).css("left","720px");
+                    $(this).css("top","400px");
+                }
+                if (e.pageX>=200 && e.pageX<=1000 && e.pageY<=400) {
                     $(this).draggable({revert: false});
                     $(this).css("left","440px");
                     $(this).css("top","180px");
