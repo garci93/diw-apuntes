@@ -12,24 +12,36 @@
             }
             div#banner {
                 z-index: 30;
-                height: 10%;
+                height: 5%;
                 background-color: #aaa;
                 color: #fff;
                 filter: drop-shadow(0px 3px 3px #000);
-                line-height: 50%;
             }
-            #banner span{
+            #banner span {
+                padding-left: 10px;
                 font-size: 30px;
+            }
+            #boton_menu {
+                height: 100%;
+                float: right;
             }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script>
-            $(document).on("click",function(){
+        $(document).ready(function() {
+            $(document).one("click",function(){
                 $("body").append(`<div id="inicial"></div>`);
                 $("#inicial").append(`<div id="banner"></div>`);
-                $("#banner").append(`<span>Hola</span>`);
-            })
+                $("#banner").append(`<span class="gaga">Proyecto final de diseño</span>`);
+                $("#banner").append(`<img id="boton_menu" src="img/boton_menu.png">`);
+                $("#boton_menu").on("click",function(){
+                    $("#boton_menu").css({'-webkit-transform' : 'rotate(90deg)'});
+                });
+                //¿Animar botón? y usar clases para que haga toggle
+            });
+
+        });
         </script>
     </head>
     <body></body>
