@@ -6,20 +6,51 @@
         <style media="screen">
             html,body {
                 margin: auto;
+                max-width: 100%;
+                overflow-x: hidden;
             }
             div#inicial {
                 height: 100vh;
             }
             div#banner {
-                z-index: 30;
+                z-index: 20;
                 height: 5%;
-                background-color: #aaa;
-                color: #fff;
-                filter: drop-shadow(0px 3px 3px #000);
+            }
+            div#menu {
+                z-index: 30;
+                /* -moz-transition: -moz-transform 1s ease-in-out 0.2s; */
+                /* -webkit-transition: -webkit-transform 1s ease-in-out 0.2s; */
+                width: 25%;
+                height: 95%;
+                position: relative;
+                left: 100%;
+            }
+            .barra {
+                background-color: #a9dbf2;
+                color: #113163;
+                font-family: helvetica;
+                filter: drop-shadow(0px 3px 3px #000020);
+            }
+            .boton {
+                margin-left: 2%;
+                margin-bottom: 2%;
+                height: 10%;
+                width: 96%;
+                background-color: #ddffff;
+                color: #0c4399;
+                font-family: helvetica;
+                font-size: 24px;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+                filter: drop-shadow(0px 1px 1px #000020);
+                text-align: center;
+                padding-top: 5%;
             }
             #banner span {
-                padding-left: 10px;
-                font-size: 30px;
+                padding-left: 5px;
+                margin-top: 5px;
+                display: inline-block;
+                font-size: 24px;
             }
             #boton_menu {
                 height: 100%;
@@ -32,17 +63,36 @@
         $(document).ready(function() {
             $(document).one("click",function(){
                 $("body").append(`<div id="inicial"></div>`);
-                $("#inicial").append(`<div id="banner"></div>`);
-                $("#banner").append(`<span class="gaga">Proyecto final de diseño</span>`);
+                $("#inicial").append(`<div id="banner" class="barra"></div>`);
+                $("#inicial").append(`<div id="menu" class="barra"></div>`);
+                $("#banner").append(`<span>Proyecto final de diseño</span>`);
                 $("#banner").append(`<img id="boton_menu" src="img/boton_menu.png">`);
+                $("#menu").append(`<br>`);
+                $("#menu").append(`<div class="boton" id="boton1"></div>`);
+                $("#boton1").append(`<span>Insertar elemento</span>`);
+                $("#menu").append(`<div class="boton" id="boton2"></div>`);
+                $("#boton2").append(`<span>Editar elemento</span>`);
+                $("#menu").append(`<div class="boton" id="boton3"></div>`);
+                $("#boton3").append(`<span>Eliminar elemento</span>`);
                 $("#boton_menu").on("click",function(){
-                    $("#boton_menu").css({'-webkit-transform' : 'rotate(90deg)'});
+                    if($("#menu").hasClass("desplegado")) {
+                        $("#boton_menu").css({'-moz-transform' : 'rotate(0deg)'});
+                        $("#boton_menu").css({'-webkit-transform' : 'rotate(0deg)'});
+                        $("#menu").css("-moz-transform","translate(0vw)");
+                        $("#menu").css("-webkit-transform","translate(0vw)");
+                    } else {
+                        $("#boton_menu").css({'-moz-transform' : 'rotate(90deg)'});
+                        $("#boton_menu").css({'-webkit-transform' : 'rotate(90deg)'});
+                        $("#menu").css("-moz-transform","translate(-25vw)");
+                        $("#menu").css("-webkit-transform","translate(-25vw)");
+                    }
+                    $("#menu").toggleClass("desplegado");
                 });
-                //¿Animar botón? y usar clases para que haga toggle
             });
 
         });
         </script>
     </head>
-    <body></body>
+    <body>
+    </body>
 </html>
