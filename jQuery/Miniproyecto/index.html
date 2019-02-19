@@ -46,6 +46,13 @@
                 text-align: center;
                 padding-top: 5%;
             }
+            .boton:active {
+                background-color: #aaccdd;
+            }
+            .opciones {
+                margin: 10%;
+                height: 30%;
+            }
             #banner span {
                 padding-left: 5px;
                 margin-top: 5px;
@@ -74,6 +81,37 @@
                 $("#boton2").append(`<span>Editar elemento</span>`);
                 $("#menu").append(`<div class="boton" id="boton3"></div>`);
                 $("#boton3").append(`<span>Eliminar elemento</span>`);
+                $("#menu").append(`<div class="boton" id="boton4"></div>`);
+                $("#boton4").append(`<span>Cambiar diseño</span>`);
+                $("#menu").append(`<hr>`);
+                $("#menu").append(`<div class="opciones"></div>`);
+
+                $(".boton").on("click",function(){
+                    $(".opciones").empty();
+                    if(!$(this).hasClass("escogido")) {
+                        switch ($(this).attr("id")) {
+                            case "boton1":
+                                $(".opciones").append(`<span>Todo: qué tipo de elemento</span>`);
+                                break;
+                            case "boton2":
+                                $(".opciones").append(`<span>Haz click sobre el elemento a editar.</span>`);
+                                break;
+                            case "boton3":
+                                $(".opciones").append(`<span>Haz click sobre el elemento a eliminar.</span>`);
+                                break;
+                            case "boton4":
+                                $(".opciones").append(`<label name="color">Color de fondo:</label>`);
+                                $(".opciones").append(`<input id="colorFondo" name="color" type="color" value="">`);
+                                break;
+                        }
+                    }
+                    $(".boton").removeClass("escogido");
+                    $(this).toggleClass("escogido");
+                });
+                $("#colorFondo").attr("value").on("change",function (){
+                    alert("a");
+                    $("body").css("background",$(this).attr("value"));
+                });
                 $("#boton_menu").on("click",function(){
                     if($("#menu").hasClass("desplegado")) {
                         $("#boton_menu").css({'-moz-transform' : 'rotate(0deg)'});
