@@ -46,6 +46,14 @@
                 text-align: center;
                 padding-top: 5%;
             }
+            .elemento {
+                color: #0c4399;
+                //estilo por defecto de los elementos, meter fondo forma etc
+            }
+            .boton:hover {
+                color: #c0e3ee;
+                background-color: #ddffff;
+            }
             .boton:active {
                 background-color: #aaccdd;
             }
@@ -88,10 +96,21 @@
 
                 $(".boton").on("click",function(){
                     $(".opciones").empty();
-                    if(!$(this).hasClass("escogido")) {
+                    if($(this).hasClass("escogido")) {
+                        $(".boton").removeClass("escogido");
+                    } else {
                         switch ($(this).attr("id")) {
                             case "boton1":
-                                $(".opciones").append(`<span>Todo: qué tipo de elemento</span>`);
+                                $(".opciones").append(`<span>Elige el tipo de elemento a insertar</span>`);
+                                $(".opciones").append(`<select id="tipoElem">`);
+                                var tiposElem = ["texto","imagen"];
+                                for(var i in tiposElem){
+                                    $("#tipoElem").append(`<option id=${tiposElem[i]}>${tiposElem[i]}</option>`);
+                                }
+                                $(".opciones").append(`<button id="insertar">Insertar</button>`);
+                                $("#insertar").on("click",function (){
+                                    setTimeout(100,insertar($("#tipoElem")));
+                                });
                                 break;
                             case "boton2":
                                 $(".opciones").append(`<span>Haz click sobre el elemento a editar.</span>`);
@@ -102,15 +121,14 @@
                             case "boton4":
                                 $(".opciones").append(`<label name="color">Color de fondo:</label>`);
                                 $(".opciones").append(`<input id="colorFondo" name="color" type="color" value="">`);
+                                $("#colorFondo").on("change",function (){
+                                    $("body").css("background",$(this).val());
+                                });
                                 break;
                         }
+                        $(".boton").removeClass("escogido");
+                        $(this).toggleClass("escogido");
                     }
-                    $(".boton").removeClass("escogido");
-                    $(this).toggleClass("escogido");
-                });
-                $("#colorFondo").attr("value").on("change",function (){
-                    alert("a");
-                    $("body").css("background",$(this).attr("value"));
                 });
                 $("#boton_menu").on("click",function(){
                     if($("#menu").hasClass("desplegado")) {
@@ -128,6 +146,20 @@
                 });
             });
 
+            function insertar() {
+                switch ($("#tipoElem").children("option:selected").attr("id")) {
+                    case "texto":
+                        var contenido = prompt("Introduce el contenido del texto");
+                        alert("Haz click donde quieras colocar el elemento");
+                        $("#inicial").append(`<p class=texto top=${}>${contenido}</p>`);
+                    case "imagen":
+                        $(".opciones").append(`<span>Haz click sobre el elemento a editar.</span>`);
+                        break;
+                    default:
+                        alert("yeo");
+                }
+
+            }
         });
         </script>
     </head>
