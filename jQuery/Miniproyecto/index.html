@@ -51,8 +51,7 @@
                 //estilo por defecto de los elementos, meter fondo forma etc
             }
             .boton:hover {
-                color: #c0e3ee;
-                background-color: #ddffff;
+                background-color: #c0e3ee;
             }
             .boton:active {
                 background-color: #aaccdd;
@@ -151,9 +150,9 @@
                     case "texto":
                         var contenido = prompt("Introduce el contenido del texto");
                         alert("Haz click donde quieras colocar el elemento");
-                        $("#inicial").append(`<p class=texto top=${meteAlgoAquiXd}>${contenido}</p>`);
+                        $("#inicial").append(`<p position="fixed" class="texto" top="100px" draggable>${contenido}</p>`);
+                        $("#inicial").append(`<img src="./img/boton_menu.png" class="texto" top="100px" draggable>${contenido}</p>`);
                     case "imagen":
-                        $(".opciones").append(`<span>Haz click sobre el elemento a editar.</span>`);
                         break;
                     default:
                         alert("yeo");
