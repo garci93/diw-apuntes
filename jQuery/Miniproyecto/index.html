@@ -47,7 +47,13 @@
                 padding-top: 5%;
             }
             .elemento {
-                color: #0c4399;
+                background-color: #a9dbf2;
+                font-family: helvetica;
+                padding: 5%;
+                width: 60%;
+                z-index: 1;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
                 //estilo por defecto de los elementos, meter fondo forma etc
             }
             .boton:hover {
@@ -150,13 +156,14 @@
                     case "texto":
                         var contenido = prompt("Introduce el contenido del texto");
                         alert("Haz click donde quieras colocar el elemento");
-                        $("#inicial").append(`<p position="fixed" class="texto" top="100px" draggable>${contenido}</p>`);
-                        $("#inicial").append(`<img src="./img/boton_menu.png" class="texto" top="100px" draggable>${contenido}</p>`);
+                        $("#inicial").append(`<div position="fixed" class="elemento" top="100px" draggable><p>${contenido}</p></div>`);
+                        $("#inicial").append(`<img src="./img/boton_menu.png" class="texto" top="100px" draggable></img>`);
                     case "imagen":
                         break;
                     default:
                         alert("yeo");
                 }
+                $(".elemento").draggable();
 
             }
         });
