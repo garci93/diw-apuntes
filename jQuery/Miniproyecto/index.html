@@ -50,7 +50,7 @@
                 background-color: #a9dbf2;
                 font-family: helvetica;
                 padding: 5%;
-                width: 60%;
+                width: 50%;
                 z-index: 1;
                 -moz-border-radius: 5px;
                 -webkit-border-radius: 5px;
@@ -63,7 +63,7 @@
                 background-color: #aaccdd;
             }
             .opciones {
-                margin: 10%;
+                margin: 5%;
                 height: 30%;
             }
             #banner span {
@@ -124,10 +124,29 @@
                                 $(".opciones").append(`<span>Haz click sobre el elemento a eliminar.</span>`);
                                 break;
                             case "boton4":
-                                $(".opciones").append(`<label name="color">Color de fondo:</label>`);
-                                $(".opciones").append(`<input id="colorFondo" name="color" type="color" value="">`);
+                                $(".opciones").append(`<label name="colorFondo">Color de fondo: </label>`);
+                                $(".opciones").append(`<input id="colorFondo" name="colorFondo" type="color" value=""><br>`);
+                                $(".opciones").append(`<label name="colorFondoElemento">Color de fondo de elemento: </label>`);
+                                $(".opciones").append(`<input id="colorFondoElemento" name="colorFondoElemento" type="color" value=""><br>`);
+                                $(".opciones").append(`<label name="tamanyoLetra">Tamaño de letra: </label>`);
+                                $(".opciones").append(`<input id="tamanyoLetra" name="tamanyoLetra" type="text" value=""><br>`);
+                                $(".opciones").append(`<label name="colorLetra">Color de letra: </label>`);
+                                $(".opciones").append(`<input id="colorLetra" name="colorLetra" type="color" value=""><br>`);
                                 $("#colorFondo").on("change",function (){
                                     $("body").css("background",$(this).val());
+                                });
+                                $("#colorFondoElemento").on("change",function (){
+                                    $(".elemento").css("background",$(this).val());
+                                });
+                                $("#tamanyoLetra").on("change",function (){
+                                    if ($(this).val() < 8 || $(this).val() > 500) {
+                                        alert("El tamaño debe ser un número comprendido entre 8 y 500");
+                                    } else {
+                                        $(".elemento").css("font-size",`${$(this).val()}px`);
+                                    }
+                                });
+                                $("#colorLetra").on("change",function (){
+                                    $(".elemento").css("color",$(this).val());
                                 });
                                 break;
                         }
@@ -155,15 +174,27 @@
                 switch ($("#tipoElem").children("option:selected").attr("id")) {
                     case "texto":
                         var contenido = prompt("Introduce el contenido del texto");
-                        alert("Haz click donde quieras colocar el elemento");
+                        $("#boton_menu").css({'-moz-transform' : 'rotate(0deg)'});
+                        $("#boton_menu").css({'-webkit-transform' : 'rotate(0deg)'});
+                        $("#menu").css("-moz-transform","translate(0vw)");
+                        $("#menu").css("-webkit-transform","translate(0vw)");
+                        $("#menu").toggleClass("desplegado");
                         $("#inicial").append(`<div position="fixed" class="elemento" top="100px" draggable><p>${contenido}</p></div>`);
-                        $("#inicial").append(`<img src="./img/boton_menu.png" class="texto" top="100px" draggable></img>`);
+                        break;
                     case "imagen":
+                        var url = prompt("Introduce la URL de la imagen");
+                        $("#boton_menu").css({'-moz-transform' : 'rotate(0deg)'});
+                        $("#boton_menu").css({'-webkit-transform' : 'rotate(0deg)'});
+                        $("#menu").css("-moz-transform","translate(0vw)");
+                        $("#menu").css("-webkit-transform","translate(0vw)");
+                        $("#menu").toggleClass("desplegado");
+                        $("#inicial").append(`<div position="fixed" class="imagen" top="100px" draggable><img src=${url}></img></div>`);
                         break;
                     default:
                         alert("yeo");
                 }
                 $(".elemento").draggable();
+                $(".imagen").draggable();
 
             }
         });
