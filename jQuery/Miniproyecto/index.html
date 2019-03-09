@@ -18,8 +18,8 @@
             }
             div#menu {
                 z-index: 30;
-                /* -moz-transition: -moz-transform 1s ease-in-out 0.2s; */
-                /* -webkit-transition: -webkit-transform 1s ease-in-out 0.2s; */
+                -moz-transition: -moz-transform 1s ease-in-out 0.2s;
+                -webkit-transition: -webkit-transform 1s ease-in-out 0.2s;
                 width: 25%;
                 height: 95%;
                 position: relative;
@@ -50,11 +50,16 @@
                 background-color: #a9dbf2;
                 font-family: helvetica;
                 padding: 5%;
-                width: 50%;
+                overflow-x: hidden;
+                position: absolute;
+                top: 100px;
                 z-index: 1;
+                width: 40%;
                 -moz-border-radius: 5px;
                 -webkit-border-radius: 5px;
-                //estilo por defecto de los elementos, meter fondo forma etc
+            }
+            .elemento .contenido {
+                display: inline-block;
             }
             .boton:hover {
                 background-color: #c0e3ee;
@@ -122,6 +127,9 @@
                                 break;
                             case "boton3":
                                 $(".opciones").append(`<span>Haz click sobre el elemento a eliminar.</span>`);
+                                $(".elemento").on("click",function (){
+                                    $(this).remove();
+                                });
                                 break;
                             case "boton4":
                                 $(".opciones").append(`<label name="colorFondo">Color de fondo: </label>`);
@@ -156,45 +164,46 @@
                 });
                 $("#boton_menu").on("click",function(){
                     if($("#menu").hasClass("desplegado")) {
-                        $("#boton_menu").css({'-moz-transform' : 'rotate(0deg)'});
-                        $("#boton_menu").css({'-webkit-transform' : 'rotate(0deg)'});
-                        $("#menu").css("-moz-transform","translate(0vw)");
-                        $("#menu").css("-webkit-transform","translate(0vw)");
+                        rotarBotonIzquierda();
                     } else {
-                        $("#boton_menu").css({'-moz-transform' : 'rotate(90deg)'});
-                        $("#boton_menu").css({'-webkit-transform' : 'rotate(90deg)'});
-                        $("#menu").css("-moz-transform","translate(-25vw)");
-                        $("#menu").css("-webkit-transform","translate(-25vw)");
+                        rotarBotonDerecha();
                     }
                     $("#menu").toggleClass("desplegado");
                 });
             });
 
+            function rotarBotonIzquierda(){
+                $("#boton_menu").css({'-moz-transform' : 'rotate(0deg)'});
+                $("#boton_menu").css({'-webkit-transform' : 'rotate(0deg)'});
+                $("#menu").css("-moz-transform","translate(0vw)");
+                $("#menu").css("-webkit-transform","translate(0vw)");
+            }
+
+            function rotarBotonDerecha(){
+                $("#boton_menu").css({'-moz-transform' : 'rotate(90deg)'});
+                $("#boton_menu").css({'-webkit-transform' : 'rotate(90deg)'});
+                $("#menu").css("-moz-transform","translate(-25vw)");
+                $("#menu").css("-webkit-transform","translate(-25vw)");
+            }
+
             function insertar() {
                 switch ($("#tipoElem").children("option:selected").attr("id")) {
                     case "texto":
                         var contenido = prompt("Introduce el contenido del texto");
-                        $("#boton_menu").css({'-moz-transform' : 'rotate(0deg)'});
-                        $("#boton_menu").css({'-webkit-transform' : 'rotate(0deg)'});
-                        $("#menu").css("-moz-transform","translate(0vw)");
-                        $("#menu").css("-webkit-transform","translate(0vw)");
+                        rotarBotonIzquierda();
                         $("#menu").toggleClass("desplegado");
-                        $("#inicial").append(`<div position="fixed" class="elemento" top="100px" draggable><p>${contenido}</p></div>`);
+                        $("#inicial").append(`<div position="fixed" class="elemento" top="100px" draggable><p class="contenido">${contenido}</p></div>`);
                         break;
                     case "imagen":
                         var url = prompt("Introduce la URL de la imagen");
-                        $("#boton_menu").css({'-moz-transform' : 'rotate(0deg)'});
-                        $("#boton_menu").css({'-webkit-transform' : 'rotate(0deg)'});
-                        $("#menu").css("-moz-transform","translate(0vw)");
-                        $("#menu").css("-webkit-transform","translate(0vw)");
+                        rotarBotonIzquierda();
                         $("#menu").toggleClass("desplegado");
-                        $("#inicial").append(`<div position="fixed" class="imagen" top="100px" draggable><img src=${url}></img></div>`);
+                        $("#inicial").append(`<div position="fixed" class="elemento" top="100px" draggable><img src=${url}></img></div>`);
                         break;
                     default:
-                        alert("yeo");
+                        alert("Error inesperado");
                 }
                 $(".elemento").draggable();
-                $(".imagen").draggable();
 
             }
         });
