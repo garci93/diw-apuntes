@@ -73,13 +73,29 @@
             }
             #banner span {
                 padding-left: 5px;
-                margin-top: 5px;
                 display: inline-block;
+                padding-right: 5px;
+            }
+            #titulo {
                 font-size: 24px;
             }
-            #boton_menu {
+            #botonPublicada {
+                height: 100%;
+                padding-left: 5px;
+                font-size: 16px;
+            }
+            #botonPublicada:hover {
+                color: #fff;
+            }
+            #botonMenu {
                 height: 100%;
                 float: right;
+            }
+            #botonDiseno {
+                height: 5vh;
+                position:absolute;
+                top: 95vh;
+                z-index: 40;
             }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -90,8 +106,9 @@
                 $("body").append(`<div id="inicial"></div>`);
                 $("#inicial").append(`<div id="banner" class="barra"></div>`);
                 $("#inicial").append(`<div id="menu" class="barra"></div>`);
-                $("#banner").append(`<span>Proyecto final de diseño</span>`);
-                $("#banner").append(`<img id="boton_menu" src="img/boton_menu.png">`);
+                $("#banner").append(`<span id="titulo">Proyecto final de diseño</span>`);
+                $("#banner").append(`<span id="botonPublicada">Vista publicada</span>`);
+                $("#banner").append(`<img id="botonMenu" src="img/boton_menu.png">`);
                 $("#menu").append(`<br>`);
                 $("#menu").append(`<div class="boton" id="boton1"></div>`);
                 $("#boton1").append(`<span>Insertar elemento</span>`);
@@ -162,7 +179,15 @@
                         $(this).toggleClass("escogido");
                     }
                 });
-                $("#boton_menu").on("click",function(){
+                $("#botonPublicada").on("click",function(){
+                    $(".barra").slideUp();
+                    $("#inicial").append(`<img id="botonDiseno" src="img/boton_edicion.png">`);
+                    $("#botonDiseno").on("click",function(){
+                        $(this).detach();
+                        $(".barra").slideDown();
+                    });
+                });
+                $("#botonMenu").on("click",function(){
                     if($("#menu").hasClass("desplegado")) {
                         rotarBotonIzquierda();
                     } else {
@@ -173,15 +198,15 @@
             });
 
             function rotarBotonIzquierda(){
-                $("#boton_menu").css({'-moz-transform' : 'rotate(0deg)'});
-                $("#boton_menu").css({'-webkit-transform' : 'rotate(0deg)'});
+                $("#botonMenu").css({'-moz-transform' : 'rotate(0deg)'});
+                $("#botonMenu").css({'-webkit-transform' : 'rotate(0deg)'});
                 $("#menu").css("-moz-transform","translate(0vw)");
                 $("#menu").css("-webkit-transform","translate(0vw)");
             }
 
             function rotarBotonDerecha(){
-                $("#boton_menu").css({'-moz-transform' : 'rotate(90deg)'});
-                $("#boton_menu").css({'-webkit-transform' : 'rotate(90deg)'});
+                $("#botonMenu").css({'-moz-transform' : 'rotate(90deg)'});
+                $("#botonMenu").css({'-webkit-transform' : 'rotate(90deg)'});
                 $("#menu").css("-moz-transform","translate(-25vw)");
                 $("#menu").css("-webkit-transform","translate(-25vw)");
             }
