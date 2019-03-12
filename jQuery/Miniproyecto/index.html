@@ -49,12 +49,11 @@
             .elemento {
                 background-color: #a9dbf2;
                 font-family: helvetica;
-                padding: 5%;
+                padding: 1%;
                 overflow-x: hidden;
                 position: absolute;
                 top: 100px;
                 z-index: 1;
-                width: 40%;
                 -moz-border-radius: 5px;
                 -webkit-border-radius: 5px;
             }
@@ -97,6 +96,14 @@
                 top: 95vh;
                 z-index: 40;
             }
+            table,td {
+                 border-width: 1px;
+                 border-style: solid;
+                 border-color: black;
+            }
+            table {
+                border-collapse: collapse;
+            }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -106,14 +113,14 @@
                 $("body").append(`<div id="inicial"></div>`);
                 $("#inicial").append(`<div id="banner" class="barra"></div>`);
                 $("#inicial").append(`<div id="menu" class="barra"></div>`);
+                $("#inicial").append(`<div id="contenedor"></div>`);
                 $("#banner").append(`<span id="titulo">Proyecto final de diseño</span>`);
-                $("#banner").append(`<span id="botonPublicada">Vista publicada</span>`);
                 $("#banner").append(`<img id="botonMenu" src="img/boton_menu.png">`);
                 $("#menu").append(`<br>`);
                 $("#menu").append(`<div class="boton" id="boton1"></div>`);
                 $("#boton1").append(`<span>Insertar elemento</span>`);
                 $("#menu").append(`<div class="boton" id="boton2"></div>`);
-                $("#boton2").append(`<span>Editar elemento</span>`);
+                $("#boton2").append(`<span>Editar estilo de menú</span>`);
                 $("#menu").append(`<div class="boton" id="boton3"></div>`);
                 $("#boton3").append(`<span>Eliminar elemento</span>`);
                 $("#menu").append(`<div class="boton" id="boton4"></div>`);
@@ -130,7 +137,7 @@
                             case "boton1":
                                 $(".opciones").append(`<span>Elige el tipo de elemento a insertar</span>`);
                                 $(".opciones").append(`<select id="tipoElem">`);
-                                var tiposElem = ["texto","imagen"];
+                                var tiposElem = ["texto","imagen","tabla"];
                                 for(var i in tiposElem){
                                     $("#tipoElem").append(`<option id=${tiposElem[i]}>${tiposElem[i]}</option>`);
                                 }
@@ -140,12 +147,23 @@
                                 });
                                 break;
                             case "boton2":
-                                $(".opciones").append(`<span>Haz click sobre el elemento a editar.</span>`);
+                                $(".opciones").append(`<select id="tipoMenu">`);
+                                var tiposMenu = ["Azul","Verde","Ocre","Rojo"];
+                                for(var i in tiposMenu){
+                                    $("#tipoMenu").append(`<option id=${tiposMenu[i]}>${tiposMenu[i]}</option>`);
+                                }
+                                $(".opciones").append(`<button id="cambiar">Cambiar</button>`);
+                                $("#cambiar").on("click",function (){
+                                    setTimeout(100,insertar($("#tipoMenu")));
+                                });
                                 break;
                             case "boton3":
                                 $(".opciones").append(`<span>Haz click sobre el elemento a eliminar.</span>`);
                                 $(".elemento").on("click",function (){
                                     $(this).remove();
+                                    if($("#contenedor").is(':empty')) {
+                                        $("#botonPublicada").remove();
+                                    }
                                 });
                                 break;
                             case "boton4":
@@ -157,6 +175,10 @@
                                 $(".opciones").append(`<input id="tamanyoLetra" name="tamanyoLetra" type="text" value=""><br>`);
                                 $(".opciones").append(`<label name="colorLetra">Color de letra: </label>`);
                                 $(".opciones").append(`<input id="colorLetra" name="colorLetra" type="color" value=""><br>`);
+                                $(".opciones").append(`<label name="colorBordeTabla">Color de borde de tabla: </label>`);
+                                $(".opciones").append(`<input id="colorBordeTabla" name="colorBordeTabla" type="color" value=""><br>`);
+                                $(".opciones").append(`<label name="colorFondoTabla">Color de fondo de tabla: </label>`);
+                                $(".opciones").append(`<input id="colorFondoTabla" name="colorFondoTabla" type="color" value=""><br>`);
                                 $("#colorFondo").on("change",function (){
                                     $("body").css("background",$(this).val());
                                 });
@@ -173,19 +195,17 @@
                                 $("#colorLetra").on("change",function (){
                                     $(".elemento").css("color",$(this).val());
                                 });
+                                $("#colorBordeTabla").on("change",function (){
+                                    $("table,td").css("border-color",$(this).val());
+                                });
+                                $("#colorFondoTabla").on("change",function (){
+                                    $("table").css("background-color",$(this).val());
+                                });
                                 break;
                         }
                         $(".boton").removeClass("escogido");
                         $(this).toggleClass("escogido");
                     }
-                });
-                $("#botonPublicada").on("click",function(){
-                    $(".barra").slideUp();
-                    $("#inicial").append(`<img id="botonDiseno" src="img/boton_edicion.png">`);
-                    $("#botonDiseno").on("click",function(){
-                        $(this).detach();
-                        $(".barra").slideDown();
-                    });
                 });
                 $("#botonMenu").on("click",function(){
                     if($("#menu").hasClass("desplegado")) {
@@ -212,18 +232,96 @@
             }
 
             function insertar() {
+                if($("#contenedor").is(':empty')) {
+                    $("#banner").append(`<span id="botonPublicada">Vista publicada</span>`);
+                }
+                $("#botonPublicada").on("click",function(){
+                    $(".barra").slideUp();
+                    if($("#botonDiseno").length > 0){
+                    } else {
+                        $("#inicial").append(`<img id="botonDiseno" src="img/boton_edicion.png">`);
+
+                    }
+                    $(".elemento").draggable('disable');
+                    $("#botonDiseno").on("click",function(){
+                        $(".elemento").draggable('enable');
+                        $(this).detach();
+                        $(".barra").slideDown();
+                    });
+                });
                 switch ($("#tipoElem").children("option:selected").attr("id")) {
                     case "texto":
                         var contenido = prompt("Introduce el contenido del texto");
                         rotarBotonIzquierda();
                         $("#menu").toggleClass("desplegado");
-                        $("#inicial").append(`<div position="fixed" class="elemento" top="100px" draggable><p class="contenido">${contenido}</p></div>`);
+                        $("#contenedor").append(`<div position="fixed" class="elemento" top="100px" draggable><p class="contenido">${contenido}</p></div>`);
                         break;
                     case "imagen":
                         var url = prompt("Introduce la URL de la imagen");
                         rotarBotonIzquierda();
                         $("#menu").toggleClass("desplegado");
-                        $("#inicial").append(`<div position="fixed" class="elemento" top="100px" draggable><img src=${url}></img></div>`);
+                        $("#contenedor").append(`<div position="fixed" class="elemento" top="100px" draggable><img src=${url}></img></div>`);
+                        break;
+                    case "tabla":
+                        var ancho = prompt("Introduce el ancho de la tabla");
+                        var alto = prompt("Introduce el alto de la tabla");
+                        var cuerpo_tabla = '<div position="fixed" class="elemento" top="100px" draggable><table>';
+                        for(var i=0;i<alto;i++){
+                            cuerpo_tabla+='<tr>';
+                            for(var j=0;j<ancho;j++){
+                                cuerpo_tabla +='<td class="celda">';
+                                cuerpo_tabla +='Doble click';
+                                cuerpo_tabla +='</td>';
+                            }
+                            cuerpo_tabla+='</tr>';
+                        }
+                        cuerpo_tabla+='</table></div>';
+                        $('#contenedor').html(cuerpo_tabla);
+                        $("#menu").toggleClass("desplegado");
+                        $(".celda").dblclick(function(){
+                            var cont_celda=prompt("Introduzca el contenido de la celda");
+                            $(this).html(cont_celda);
+                        });
+                        break;
+                    default:
+                        alert("Error inesperado");
+                }
+                $(".elemento").draggable();
+
+            }
+            function insertar() {
+                switch ($("#tipoMenu").children("option:selected").attr("id")) {
+                    case "Azul":
+                        $(".barra").css("background-color","#a9dbf2");
+                        $(".barra").css("color","#113163");
+                        $(".boton").css("background-color","#ddffff");
+                        $(".boton:hover").css("background-color","#c0e3ee");
+                        $(".boton:active").css("background-color","#aaccdd");
+                        $(".boton").css("color","#0c4399");
+                        break;
+                    case "Verde":
+                        $(".barra").css("background-color","#a9f2db");
+                        $(".barra").css("color","#116331");
+                        $(".boton").css("background-color","#eeffee");
+                        $(".boton:hover").css("background-color","#c0eee3");
+                        $(".boton:active").css("background-color","#aaddcc");
+                        $(".boton").css("color","#0c9943");
+                        break;
+                    case "Ocre":
+                        $(".barra").css("background-color","#f2dba9");
+                        $(".barra").css("color","#633111");
+                        $(".boton").css("background-color","#ffffdd");
+                        $(".boton:hover").css("background-color","#eee3c0");
+                        $(".boton:active").css("background-color","#ddcaa");
+                        $(".boton").css("color","#99430c");
+                        break;
+                    case "Rojo":
+                        $(".barra").css("background-color","#f2b9a9");
+                        $(".barra").css("color","#631111");
+                        $(".boton").css("background-color","#ffeedd");
+                        $(".boton:hover").css("background-color","#c0e3e3");
+                        $(".boton:active").css("background-color","#ddaaaa");
+                        $(".boton").css("color","#990c0c");
                         break;
                     default:
                         alert("Error inesperado");
