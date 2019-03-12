@@ -154,7 +154,7 @@
                                 }
                                 $(".opciones").append(`<button id="cambiar">Cambiar</button>`);
                                 $("#cambiar").on("click",function (){
-                                    setTimeout(100,insertar($("#tipoMenu")));
+                                    setTimeout(100,cambiar($("#tipoMenu")));
                                 });
                                 break;
                             case "boton3":
@@ -249,6 +249,7 @@
                         $(".barra").slideDown();
                     });
                 });
+                alert($("#tipoElem").children("option:selected").attr("id"));
                 switch ($("#tipoElem").children("option:selected").attr("id")) {
                     case "texto":
                         var contenido = prompt("Introduce el contenido del texto");
@@ -289,7 +290,7 @@
                 $(".elemento").draggable();
 
             }
-            function insertar() {
+            function cambiar() {
                 switch ($("#tipoMenu").children("option:selected").attr("id")) {
                     case "Azul":
                         $(".barra").css("background-color","#a9dbf2");
